@@ -8,8 +8,6 @@ from collections import defaultdict
 record_name="/tmp/voidmain-cartpole-experiment-mc-1"
 openai_apikey=os.environ["OPENAI_KEY"]
 
-print(openai_apikey)
-
 env = gym.make('CartPole-v0')
 env = wrappers.Monitor(env, record_name, force=True)
 
@@ -118,5 +116,5 @@ def mc_control_importance_sampling(env, num_episodes, behavior_policy, discount_
 random_policy = create_random_policy(env.action_space.n)
 Q, policy = mc_control_importance_sampling(env, num_episodes=5000, behavior_policy=random_policy)
 
-
+env.close()
 gym.upload(record_name, api_key=openai_apikey)
